@@ -1,0 +1,74 @@
+{
+  "dag": "example_pipeline",
+  "nodes": [
+    {
+      "type": "table",
+      "name": "raw_users",
+      "schema": {
+        "id": "int",
+        "name": "str",
+        "email": "str"
+      },
+      "inputs": {
+        "team": "${raw_users.team}"
+      },
+      "outputs": {
+        "resource_id": "${raw_users.resource_id}"
+      }
+    },
+    {
+      "type": "table",
+      "name": "raw_orders",
+      "schema": {
+        "order_id": "int",
+        "user_id": "int",
+        "total": "float"
+      },
+      "inputs": {
+        "team": "${raw_orders.team}"
+      },
+      "outputs": {
+        "resource_id": "${raw_orders.resource_id}"
+      }
+    },
+    {
+      "name": "ingest_users",
+      "type": "job",
+      "depends_on": [
+        "raw_users"
+      ]
+    },
+    {
+      "type": "table",
+      "name": "user_orders",
+      "schema": {
+        "user_name": "str",
+        "order_total": "float"
+      },
+      "inputs": {
+        "team": "${user_orders.team}"
+      },
+      "outputs": {
+        "resource_id": "${user_orders.resource_id}"
+      },
+      "depends_on": [
+        "raw_users",
+        "raw_orders"
+      ]
+    },
+    {
+      "name": "build_report",
+      "type": "job",
+      "depends_on": [
+        "user_orders"
+      ]
+    }
+  ],
+  "execution_order": [
+    "raw_users",
+    "raw_orders",
+    "ingest_users",
+    "user_orders",
+    "build_report"
+  ]
+}
