@@ -1,0 +1,33 @@
+{
+  "resources": {
+    "raw_users": {
+      "type": "table",
+      "resource_id": "0e74d027-5447-4290-b16f-9786536173a1",
+      "schema": {
+        "id": "int",
+        "name": "str",
+        "email": "str"
+      },
+      "team": "data-team"
+    },
+    "raw_orders": {
+      "type": "table",
+      "resource_id": "6a0051c0-f503-4725-afbe-c3caf6c5569c",
+      "schema": {
+        "order_id": "int",
+        "user_id": "int",
+        "total": "float"
+      },
+      "team": "data-team"
+    },
+    "user_orders": {
+      "type": "table",
+      "resource_id": "2889a2bb-63b5-4411-ad78-c25d23da0074",
+      "schema": {
+        "user_name": "str",
+        "order_total": "float"
+      },
+      "team": "analytics-team"
+    }
+  }
+}

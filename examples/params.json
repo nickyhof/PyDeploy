@@ -1,0 +1,11 @@
+{
+  "raw_users": {
+    "team": "data-team"
+  },
+  "raw_orders": {
+    "team": "data-team"
+  },
+  "user_orders": {
+    "team": "analytics-team"
+  }
+}
